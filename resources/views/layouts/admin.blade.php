@@ -93,7 +93,33 @@
         </nav>
 
         <main class="">
-            @yield('content')
+            <div class="container">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card p-2 mt-4 shadow-lg border-0">
+
+                            <nav class="nav nav-pills flex-column">
+                                <a class="nav-link {{ Route::currentRouteName() === 'admin.dashboard' ? 'active' : '' }}"
+                                    href="{{ route('admin.dashboard') }}"
+                                    aria-current="page">{{ __('Dashboard') }}</a>
+                                <a class="nav-link {{ Route::currentRouteName() === 'admin.cars.index' ? 'active' : '' }}"
+                                    href="{{ route('admin.cars.index') }}" aria-current="page">{{ __('Cars') }}</a>
+
+                                <a class="nav-link {{ Route::currentRouteName() === 'admin.cars.create' ? 'active' : '' }}"
+                                    href="{{ route('admin.cars.create') }}"
+                                    aria-current="page">{{ __('add Car') }}</a>
+
+                                <a class="nav-link" href="#">Link</a>
+                                <a class="nav-link" href="#"> link</a>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        @yield('content')
+                    </div>
+
+                </div>
+            </div>
         </main>
     </div>
 </body>

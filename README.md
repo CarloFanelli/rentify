@@ -89,3 +89,55 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     "type": "module", dal file package.json
 
 - npm run dev & php artisan serve (digitandoli così insieme)
+
+- php artisan migrate per fare la migrazione
+
+- entro in tinker con php artisan ti
+    User::factory()->create();
+    $user = User::first();
+    $user->email = 'test@test.it;
+    $user->save;
+
+    in questo modo ho creato un utente e modificato la sua mail in test@test.it
+
+
+- creo un controller per la Dashboard
+    php artisan make:controller Admin/DashboardController
+
+- creo la sua rotta 
+    Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
+- nel RouteServiceProvider modifico:
+    public const HOME = '/dashboard'; in
+    public const HOME = '/admin';
+
+- models:
+    car model
+    category
+    features
+    customer
+    booking
+
+- migrations
+    cars
+    categories
+    fesatures
+    customers
+    booking
+
+- php artisan make:model Car -a
+    con il -a mi crea model controller, factory, reqeust
+    se sposto il controller in admin devo sistemare il namespace con
+    namespace App\Http\Admin\Controllers;
+    e reimportare il controller
+
+- sistemo la migration inserendo tutte le colonne che mi servono nel database, specificando la tipologia di dato e gli altri dettagli
+
+- sistemo il seeder, sulla base della migrazione
+    per le immagini, se metto un percorso, devo creare in storage\app\pubblic la cartella che le contenga
+
+- creo le nuove rotte per il modello Car, in modo da poter gestire tutto.
+    con Route::resource mi crea già le rotte per le crud
+
