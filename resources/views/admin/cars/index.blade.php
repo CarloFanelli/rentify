@@ -38,7 +38,7 @@
                                 <td>
 
                                     <a class="btn btn-info" href="{{ route('admin.cars.show', $car) }}">view</a>
-                                    <a class="btn btn-secondary" href="{{ route('admin.cars.edit', $car) }}">view</a>
+                                    <a class="btn btn-secondary" href="{{ route('admin.cars.edit', $car) }}">edit</a>
 
                                 </td>
 

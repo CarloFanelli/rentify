@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Models\Car;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
@@ -34,6 +35,11 @@ class CarController extends Controller
 
         $val_data = $request->validated();
 
+        if ($request->has('image')) {
+            $path = Storage::put('car_images', $val_data['image']);
+            $val_data['image'] = $path;
+        }
+
         Car::create($val_data);
 
         return to_route('admin.cars.index')->with('message', 'car added!');
@@ -53,7 +59,8 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
+
+        return view('admin.cars.edit', compact('car'));
     }
 
     /**
