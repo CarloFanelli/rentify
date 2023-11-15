@@ -71,4 +71,21 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - installo 
  laravel new *nome*
 
- -collego database in .env
+ - collego database in .env
+ - modifico in public in filesystems.php
+
+ - collego lo storage
+  php artisan storage:link
+
+- installo breeze : 
+* composer require laravel/breeze --dev -> php artisan breeze:install
+
+- uso il preset laravel:
+* composer require pacificdev/laravel_9_preset -> php artisan preset:ui bootstrap --auth
+
+- npm i
+
+- modifico il file vite.config.js in vite.config.cjs oppure tolgo 
+    "type": "module", dal file package.json
+
+- npm run dev & php artisan serve (digitandoli così insieme)
