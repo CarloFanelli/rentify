@@ -14,6 +14,7 @@
             <div class="col-6">
                 <p class="">{{ $car->fuel_type }}</p>
                 <p>{{ $car->price }} €</p>
+                <p>Category: {{ $car->category?->name }}</p>
 
                 <p>{{ $car->notes }}</p>
 

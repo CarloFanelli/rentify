@@ -27,6 +27,9 @@ class StoreCarRequest extends FormRequest
             'image' => 'nullable | image |max:200',
             'price' => 'required',
             'seats' => 'nullable',
+
+            'category_id' => 'nullable|exists:categories,id',
+
             'transmission' => 'nullable | in:automatic,manual',
             'fuel_type' => 'nullable | in:diesel,petrol,electric,gas,hybrid',
             'notes' => 'nullable'

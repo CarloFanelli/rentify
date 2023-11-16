@@ -40,6 +40,21 @@
                 <small id="brandHelper" class="form-text text-muted">type a brand</small>
             </div>
 
+
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" name="category" id="category">
+                    <option disabled>Select one</option>
+
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+
+
             <div class="mb-3">
                 <label for="price" class="form-label">price</label>
                 <input type="number" class="form-control" name="price" id="price" aria-describedby="priceHelper"
