@@ -18,7 +18,7 @@ class CarController extends Controller
     public function index()
     {
 
-        dd(['cars' => Car::all()]);
+        //dd(['cars' => Car::all()]);
 
         return view('admin.cars.index', ['cars' => Car::all()]);
     }
