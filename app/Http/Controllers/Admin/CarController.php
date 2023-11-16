@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Feature;
 use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
@@ -16,6 +17,8 @@ class CarController extends Controller
      */
     public function index()
     {
+
+        dd(['cars' => Car::all()]);
 
         return view('admin.cars.index', ['cars' => Car::all()]);
     }
@@ -27,7 +30,10 @@ class CarController extends Controller
     {
 
         $categories = Category::all();
-        return view('admin.cars.create', compact('categories'));
+        $features = Feature::all();
+        //return view('admin.cars.create', compact('categories'));
+
+        return view('admin.cars.create', compact('categories', 'features'));
     }
 
     /**
@@ -43,7 +49,11 @@ class CarController extends Controller
             $val_data['image'] = $path;
         }
 
-        Car::create($val_data);
+        $new_car = Car::create($val_data);
+
+        if ($request->has('tags')) {
+            $new_car->features()->attach($request->features);
+        }
 
         return to_route('admin.cars.index')->with('message', 'car added!');
     }
@@ -54,8 +64,9 @@ class CarController extends Controller
     public function show(Car $car)
     {
         $categories = Category::all();
+        $features = Feature::all();
 
-        return view('admin.cars.show', compact('car', 'categories'));
+        return view('admin.cars.show', compact('car', 'categories', 'features'));
     }
 
     /**
@@ -64,7 +75,9 @@ class CarController extends Controller
     public function edit(Car $car)
     {
         $categories = Category::all();
-        return view('admin.cars.edit', compact('car', 'categories'));
+        $features = Feature::all();
+
+        return view('admin.cars.edit', compact('car', 'categories', 'features'));
     }
 
     /**
@@ -84,6 +97,10 @@ class CarController extends Controller
         }
 
         $car->update($val_data);
+
+        if ($request->has('features')) {
+            $car->features()->sync($request->input('features'));
+        }
 
         return to_route('admin.cars.show', compact('car'))->with('message', 'car updated');
     }

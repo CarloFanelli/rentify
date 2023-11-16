@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -14,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('admin.categories.index', ['categories' => Category::all()]);
     }
 
     /**
@@ -30,7 +32,15 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+
+        $val_data = $request->validated();
+        $val_data['slug'] = Str::slug($val_data['name']);
+
+
+
+        Category::create($val_data);
+
+        return to_route('admin.categories.index')->with('message', 'category added!');
     }
 
     /**

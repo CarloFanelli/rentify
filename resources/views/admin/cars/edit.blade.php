@@ -60,6 +60,30 @@
             </div>
 
 
+            <div class="features d-flex flex-column overflow-y-auto border rounded-2 p-2" style="max-height: 140px">
+                @forelse ($features as $feature)
+                    <div class="form-check form-check-inline">
+
+                        @if ($errors->any())
+                            <input class="form-check-input" type="checkbox" id="feature_{{ $feature->id }}"
+                                name="features[]" value="{{ $feature->id }}"
+                                {{ in_array($feature->id, old('features', [])) ? 'checked' : '' }}>
+                        @else
+                            <input class="form-check-input" type="checkbox" id="feature_{{ $feature->id }}"
+                                name="features[]" value="{{ $feature->id }}"
+                                {{ $car->features->contains($feature->id) ? 'checked' : '' }}>
+                        @endif
+
+
+                        <label class="form-check-label" for="">{{ $feature->name }}</label>
+
+                    </div>
+
+                @empty
+                    <p>no features in db!</p>
+                @endforelse
+            </div>
+
 
 
             <div class="mb-3">

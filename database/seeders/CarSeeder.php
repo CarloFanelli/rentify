@@ -16,7 +16,7 @@ class CarSeeder extends Seeder
     {
         $cars = [];
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $car = new Car();
             $car->image = 'car_images/' . $faker->image('public/storage/car_images', fullPath: false);
             $car->model = $faker->word;

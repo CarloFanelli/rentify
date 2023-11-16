@@ -15,6 +15,18 @@
                 <p class="">{{ $car->fuel_type }}</p>
                 <p>{{ $car->price }} €</p>
                 <p>Category: {{ $car->category?->name }}</p>
+                <div class="features">
+                    <p>features: </p>
+                    <ul>
+                        @forelse ($car->features as $feature)
+                            <li>
+                                <span class="badge rounded-pill text-bg-primary">{{ $feature->name }}</span>
+                            </li>
+
+                        @empty
+                        @endforelse
+                    </ul>
+                </div>
 
                 <p>{{ $car->notes }}</p>
 
