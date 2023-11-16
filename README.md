@@ -140,4 +140,3 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 - creo le nuove rotte per il modello Car, in modo da poter gestire tutto.
     con Route::resource mi crea già le rotte per le crud
-

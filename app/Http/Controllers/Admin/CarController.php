@@ -68,7 +68,20 @@ class CarController extends Controller
      */
     public function update(UpdateCarRequest $request, Car $car)
     {
-        //
+        $val_data = $request->validated();
+
+        if ($request->has('image')) {
+
+            if (Storage::exists($car->image)) {
+                Storage::delete($car->image);
+            }
+            $path = Storage::put('car_images', $request->image);
+            $val_data['path'] = $path;
+        }
+
+        $car->update($val_data);
+
+        return to_route('admin.cars.show', compact('car'))->with('message', 'car updated');
     }
 
     /**
@@ -76,6 +89,13 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+
+        if (Storage::exists($car->image)) {
+            Storage::delete($car->image);
+        }
+
+        $car->delete();
+
+        return to_route('admin.cars.index')->with('message', 'car deleted succesfully');
     }
 }

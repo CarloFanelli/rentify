@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+    @include('partials.session-message')
     <div class="container">
         <div class="row mt-4">
             <div class="col-6">
